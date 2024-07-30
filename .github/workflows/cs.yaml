@@ -44,10 +44,12 @@ jobs:
         # env:
         #  COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
 
+      - name: print cs result
+        run: echo "${{steps.cs.outputs.result}}"
+
       - name: comment
         if: ${{ failure() && github.event_name == 'pull_request' }}
         uses: actions/github-script@v7
-        run: echo "${{steps.cs.outputs.result}}"
         with:
           script: |
             const name = '${{ github.workflow}}';
