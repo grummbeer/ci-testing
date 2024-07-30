@@ -31,7 +31,7 @@ jobs:
           php_extensions: zip gd
 
       - name: Check formatting
-        id: cs
+        # id: cs
 
         # fatal: Invalid symmetric difference expression 18c469c4b91c69ab65d80d13e776c726f7006884...60452ba8ac3b4eed180a9a39858691cae38a1c59
         # echo $(git diff --name-only 60452ba8ac3b4eed180a9a39858691cae38a1c59...63631c8a939d15bbaf190e562a9fba7432395c3f)
@@ -44,8 +44,8 @@ jobs:
         # env:
         #  COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
 
-      - name: print cs result
-        run: echo "${{steps.cs.outputs.result}}"
+#      - name: print cs result
+#        run: echo "${{steps.cs.outputs.result}}"
 
       - name: comment
         if: ${{ failure() && github.event_name == 'pull_request' }}
@@ -55,7 +55,7 @@ jobs:
             const name = '${{ github.workflow}}';
             const url = '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
             const success = '${{ job.status }}' === 'success';
-            const body = `${name}: ${success ? 'succeeded ✅' : 'failed ❌'}  \n \```\n${{steps.cs.outputs.result}}\n\``` \n${url}`;
+            const body = `${name}: ${success ? 'succeeded ✅' : 'failed ❌'}  \n \n${url}`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
