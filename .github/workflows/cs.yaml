@@ -23,10 +23,6 @@ jobs:
         run:
           echo "$COMMIT_RANGE"
 
-      - name: commits
-        run:
-          echo $(git diff --name-only "${{ github.event.before }}...${{ github.event.after }}"))
-
       - name: Install dependencies
         uses: php-actions/composer@v6
         with:
