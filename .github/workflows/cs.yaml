@@ -7,16 +7,27 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run:
+          echo "$GITHUB_CONTEXT"
+
 #      - name: Install dependencies
 #        uses: php-actions/composer@v6
 #        with:
 #          php_version: 8.3
 #          php_extensions: zip gd
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
 
+      # "event": {
+      # "after": "a4ef0352301f9b15c139c729d626e31a7a4abfc3",
+      # "base_ref": null,
+      # "before": "2b642089c294fb93e13011c39d741392b6c0a46f",
+      - name: Show commit range
+        env:
+          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
+        run:
+          echo "$COMMIT_RANGE"
 #      - name: Check formatting
 #        # run: ./vendor/bin/ecs check
 #        # run: ./vendor/bin/ecs check $(echo $(git diff --name-only $COMMIT_RANGE))
