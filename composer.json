@@ -4,6 +4,6 @@
         "symplify/easy-coding-standard": "^12.1"
     },
     "scripts": {
-        "cs-check": "vendor/bin/ecs check --ansi --no-progress-bar"
+        "check-cs": "vendor/bin/ecs check --ansi --no-progress-bar"
     }
 }
