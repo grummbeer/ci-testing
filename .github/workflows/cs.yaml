@@ -7,57 +7,33 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Checkout project
+      - name: checkout
         uses: actions/checkout@v4
 
-      - name: context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run:
-          echo "$GITHUB_CONTEXT"
-
-      # "event": {
-      # "after": "a4ef0352301f9b15c139c729d626e31a7a4abfc3",
-      # "base_ref": null,
-      # "before": "2b642089c294fb93e13011c39d741392b6c0a46f",
-      - name: commit range
-        env:
-          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
-        run:
-          echo "$COMMIT_RANGE"
-
-      - name: Install dependencies
+      - name: dependencies
         uses: php-actions/composer@v6
         with:
           php_version: 8.3
           php_extensions: zip gd
 
-      - name: Check formatting
-        # id: cs
-
-        # fatal: Invalid symmetric difference expression 18c469c4b91c69ab65d80d13e776c726f7006884...60452ba8ac3b4eed180a9a39858691cae38a1c59
-        # echo $(git diff --name-only 60452ba8ac3b4eed180a9a39858691cae38a1c59...63631c8a939d15bbaf190e562a9fba7432395c3f)
-        #  .github/workflows/cs.yaml class.php ecs.php
-        # https://github.com/gogs/gogs/issues/4890
-
+      - name: check
         # --diff-filter=d ignore deleted files
-        run: composer check-cs -- $(echo $(git diff --diff-filter=d --name-only "${{ github.event.before }}...${{ github.event.after }}"))
-        # run: composer check-cs -- $(echo $(git diff --diff-filter=d --name-only "$COMMIT_RANGE"))
-        # env:
-        #  COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
+        run: composer check-cs -- $(echo $(git diff --diff-filter=d --name-only "$COMMIT_RANGE"))
+        env:
+          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
 
-#      - name: print cs result
-#        run: echo "${{steps.cs.outputs.result}}"
-
-      - name: comment
+      - name: comment on failure
         if: ${{ failure() && github.event_name == 'pull_request' }}
         uses: actions/github-script@v7
         with:
           script: |
-            const name = '${{ github.workflow}}';
             const url = '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
-            const success = '${{ job.status }}' === 'success';
-            const body = `${name}: ${success ? 'succeeded ✅' : 'failed ❌'}  \n \n${url}`;
+            const body = `❌ Our coding standards were not met.
+                          please run 
+                          \```shell
+                           composer fix-cs
+                          \```
+                          \n see ${url}`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
