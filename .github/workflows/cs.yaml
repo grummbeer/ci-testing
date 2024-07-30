@@ -2,7 +2,7 @@ name: coding standards
 on: [pull_request]
 # on: [push, pull_request] # runs twice
 jobs:
-  check-cs:
+  check:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
