@@ -1,7 +1,7 @@
 <?
 
-/**
- *
+/*
+ * invalid docblock?
  */
 class myclass{
     private $name;
