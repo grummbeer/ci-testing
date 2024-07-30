@@ -32,7 +32,11 @@ jobs:
       - name: Check formatting
 
         # fatal: Invalid symmetric difference expression 18c469c4b91c69ab65d80d13e776c726f7006884...60452ba8ac3b4eed180a9a39858691cae38a1c59
-        #
+        # echo $(git diff --name-only 60452ba8ac3b4eed180a9a39858691cae38a1c59...63631c8a939d15bbaf190e562a9fba7432395c3f)
+        #  .github/workflows/cs.yaml class.php ecs.php
+
+        # https://github.com/gogs/gogs/issues/4890
+
         run: composer check-cs -- $(echo $(git diff --name-only $COMMIT_RANGE))
         # run: echo $COMMIT_RANGE
         env:
