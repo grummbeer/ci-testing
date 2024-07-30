@@ -18,4 +18,5 @@ jobs:
         # run: ./vendor/bin/ecs check $(echo $(git diff --name-only $COMMIT_RANGE))
         run: echo $COMMIT_RANGE
         env:
-          COMMIT_RANGE: "${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"
+          # COMMIT_RANGE: "${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}"
+          COMMIT_RANGE: ${{ github.event.pull_request.base.sha }}...${{ github.event.pull_request.head.sha }}
