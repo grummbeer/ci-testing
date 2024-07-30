@@ -28,12 +28,12 @@ jobs:
         with:
           script: |
             const url = '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
-            const body = `❌ Our coding standards were not met.
+            const body = '❌ Our coding standards were not met.
                           please run 
-                          \```shell
+                          ```shell
                            composer fix-cs
-                          \```
-                          \n see ${url}`;
+                          ```
+                          \n see ' + url;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
