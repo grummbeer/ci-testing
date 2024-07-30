@@ -12,4 +12,6 @@ function name (  $b= null , $c  = 'foo'  )
 
 }
 
+
+
 echo (name('b'));

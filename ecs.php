@@ -7,7 +7,11 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 return ECSConfig::configure()
     ->withPaths([
         __DIR__ . '/functions.php',
+        __DIR__ . '/class.php',
+        __DIR__ . '/constants.php',
     ])
+
+    ->withFileExtensions(['php'])
 
     // add a single rule
     ->withRules([
@@ -18,8 +22,8 @@ return ECSConfig::configure()
         psr12: true,
          // arrays: true,
          // namespaces: true,
-         spaces: true,
-         // docblocks: true,
+        docblocks: true,
+        spaces: true,
          // comments: true,
      )
 
