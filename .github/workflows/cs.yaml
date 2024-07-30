@@ -7,7 +7,7 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v4
 
-      - name: Dump GitHub context
+      - name: context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run:
@@ -17,7 +17,7 @@ jobs:
       # "after": "a4ef0352301f9b15c139c729d626e31a7a4abfc3",
       # "base_ref": null,
       # "before": "2b642089c294fb93e13011c39d741392b6c0a46f",
-      - name: Show commit range
+      - name: commit range
         env:
           COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
         run:
@@ -30,7 +30,9 @@ jobs:
           php_extensions: zip gd
 
       - name: Check formatting
-        # run: ./vendor/bin/ecs check
+
+        # fatal: Invalid symmetric difference expression 18c469c4b91c69ab65d80d13e776c726f7006884...60452ba8ac3b4eed180a9a39858691cae38a1c59
+        #
         run: composer check-cs -- $(echo $(git diff --name-only $COMMIT_RANGE))
         # run: echo $COMMIT_RANGE
         env:

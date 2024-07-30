@@ -7,6 +7,7 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 return ECSConfig::configure()
     ->withPaths([
         __DIR__ . '/functions.php',
+        __DIR__ . '/class.php',
     ])
 
     // add a single rule
