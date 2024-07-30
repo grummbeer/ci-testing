@@ -2,7 +2,7 @@ name: coding standards
 on: [pull_request]
 # on: [push, pull_request] # runs twice
 jobs:
-  check:
+  check-cs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -28,7 +28,12 @@ jobs:
         with:
           script: |
             const url = '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
-            const body = '❌ Our coding standards were not met.\nplease run\n```shell\ncomposer fix-cs\n```\nsee ' + url;
+            const body = `❌ Our coding standards were not met.
+                          please run 
+                          \```shell
+                           composer fix-cs
+                          \```
+                          \n see ${url}`;
 
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
