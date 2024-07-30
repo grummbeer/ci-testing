@@ -31,6 +31,7 @@ jobs:
           php_extensions: zip gd
 
       - name: Check formatting
+        id: cs
 
         # fatal: Invalid symmetric difference expression 18c469c4b91c69ab65d80d13e776c726f7006884...60452ba8ac3b4eed180a9a39858691cae38a1c59
         # echo $(git diff --name-only 60452ba8ac3b4eed180a9a39858691cae38a1c59...63631c8a939d15bbaf190e562a9fba7432395c3f)
@@ -46,8 +47,8 @@ jobs:
       - name: comment
         if: ${{ failure() && github.event_name == 'pull_request' }}
         uses: actions/github-script@v7
+        run: echo "${{steps.cs.outputs.result}}"
         with:
-          github-token: ${{secrets.github-actions}}
           script: |
             const name = '${{ github.workflow}}';
             const url = '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}';
