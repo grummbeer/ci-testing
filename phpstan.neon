@@ -1,6 +1,6 @@
 parameters:
 	# errorFormat: github
-	# errorFormat: gitlab
+	# errorFormat: "${PHPSTAN_OUTPUT_FORMAT:=table}"
 	level: 6
 	paths:
 		- src

@@ -26,9 +26,12 @@
             "@analyse",
             "@test"
         ],
-        "cs": "tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar --output-format=checkstyle",
-        "analyse": "tools/phpstan/vendor/bin/phpstan --no-progress --error-format=$PHPSTAN_OUTPUT_FORMAT",
-        "test": "tools/phpunit/vendor/phpunit/phpunit/phpunit",
+        "cs": "tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar",
+        "analyse":[
+            "@putenv PHPSTAN_OUTPUT_DOES_NOT_WORK=${PHPSTAN_OUTPUT_FORMAT:=table}",
+            "tools/phpstan/vendor/bin/phpstan --no-progress $PHPSTAN_ERROR_FORMAT"
+        ],
+        "test": "XDEBUG_MODE=coverage tools/phpunit/vendor/phpunit/phpunit/phpunit",
         "fix-cs": "@cs --fix"
     }
 }
