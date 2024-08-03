@@ -1,10 +1,18 @@
 {
     "require-dev": {
-        "phpunit/phpunit": "^11.2",
         "symplify/easy-coding-standard": "^12.1"
     },
     "scripts": {
-        "check-cs": "vendor/bin/ecs check --ansi --no-progress-bar",
-        "fix-cs": "vendor/bin/ecs check --fix --ansi --no-progress-bar"
+
+        "ci": [
+            "@check-cs",
+            "@phpunit"
+        ],
+        "cs-check": "vendor/bin/ecs check --ansi --no-progress-bar",
+        "test": "vendor/bin/phpunit",
+        "cs-fix": "vendor/bin/ecs check --fix --ansi --no-progress-bar"
+    },
+    "require": {
+        "phpunit/phpunit": "^11.3"
     }
 }
