@@ -8,6 +8,6 @@ class SomeMath
 {
     public function pow(int $number): string
     {
-       return bcpow($number, '2');
+        return bcpow($number, '2');
     }
 }
