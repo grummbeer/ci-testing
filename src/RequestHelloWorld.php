@@ -11,6 +11,6 @@ class RequestHelloWorld
 
     public static function pow(): int
     {
-        return (int)file_get_contents('http://localhost:4444/pow.php');
+        return (int) file_get_contents('http://localhost:4444/pow.php');
     }
 }
