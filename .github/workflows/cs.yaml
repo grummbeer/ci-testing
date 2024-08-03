@@ -16,6 +16,9 @@ jobs:
           php_version: 8.3
           php_extensions: zip gd
 
+      - name: install tools
+        run: composer install-tools
+
       - name: check
         # --diff-filter=d ignore deleted files
         run: composer cs -- $(echo $(git diff --diff-filter=d --name-only "$COMMIT_RANGE"))
