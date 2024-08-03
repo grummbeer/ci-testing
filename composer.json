@@ -27,7 +27,7 @@
             "@test"
         ],
         "cs": "tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar",
-        "analyse": "tools/phpstan/vendor/bin/phpstan analyse",
+        "analyse": "tools/phpstan/vendor/bin/phpstan --no-progress",
         "test": "tools/phpunit/vendor/phpunit/phpunit/phpunit",
         "fix-cs": "@cs --fix"
     }
