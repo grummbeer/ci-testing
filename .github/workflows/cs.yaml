@@ -23,7 +23,9 @@ jobs:
           COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
 
       - name: test
-        run: composer test
+        run:
+          composer start-server
+          composer test
 
       - name: comment on failure
         if: ${{ failure() && github.event_name == 'pull_request' }}
