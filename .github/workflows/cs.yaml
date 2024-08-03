@@ -26,11 +26,12 @@ jobs:
         env:
           COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
 
-      - name: start server5
+      - name: start server
+        # run: php -S localhost:4444 -t public &
         run: composer start-server &
 
       - name: test
-        run: composer test
+        run: composer test -- --coverage-text
         env:
           XDEBUG_MODE: coverage
 
