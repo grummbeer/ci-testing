@@ -14,7 +14,7 @@ jobs:
         uses: php-actions/composer@v6
         with:
           php_version: 8.3
-          php_extensions: zip gd
+          php_extensions: zip gd bcmath
 
       - name: install tools
         run: composer install-tools
