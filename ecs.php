@@ -6,6 +6,7 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return ECSConfig::configure()
     ->withPaths([
+        __DIR__ . '/src',
         __DIR__ . '/functions.php',
         __DIR__ . '/class.php',
         __DIR__ . '/constants.php',
@@ -20,11 +21,10 @@ return ECSConfig::configure()
     // add sets - group of rules
     ->withPreparedSets(
         psr12: true,
-         // arrays: true,
-         // namespaces: true,
+        arrays: true,
+        comments: true,
         docblocks: true,
         spaces: true,
-         // comments: true,
+        namespaces: true,
      )
-
-     ;
+;

@@ -1,8 +1,8 @@
 <?php
 
-$var = FALSE;
+$var = false;
 
-const FOOLBEL = TRUE;
+const FOOLBEL = true;
 
-define('ANOTHER', FALSE);
+define('ANOTHER', false);
 define('lowercase', 'wrong');

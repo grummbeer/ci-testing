@@ -1,10 +1,34 @@
 {
-    "require-dev": {
-        "phpunit/phpunit": "^11.2",
-        "symplify/easy-coding-standard": "^12.1"
+    "name": "grummbeer/ci-testing",
+    "require": {
+        "ext-bcmath": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CiTesting\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
-        "check-cs": "vendor/bin/ecs check --ansi --no-progress-bar",
-        "fix-cs": "vendor/bin/ecs check --fix --ansi --no-progress-bar"
+        "start-server": "@php -S localhost:4444 -t public",
+        "install-tools": [
+            "mkdir --parents tools/ecs tools/phpunit tools/phpstan",
+            "@composer require --no-interaction --working-dir=tools/ecs easy-cs/easy-cs",
+            "@composer require --no-interaction --working-dir=tools/phpstan phpstan/phpstan",
+            "@composer require --no-interaction --working-dir=tools/phpunit phpunit/phpunit"
+        ],
+        "ci": [
+            "@cs",
+            "@analyse",
+            "@test"
+        ],
+        "cs": "tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar",
+        "analyse": "tools/phpstan/vendor/bin/phpstan analyse",
+        "test": "tools/phpunit/vendor/phpunit/phpunit/phpunit",
+        "fix-cs": "@cs --fix"
     }
 }
