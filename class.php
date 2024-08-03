@@ -1,20 +1,15 @@
-<?
+<?php
 
 /*
  * invalid docblock?
  */
-class myclass{
+class myclass
+{
     private $name;
 
-    function getname  (  $name =    'foiobar')
+    public function getname($name = 'foiobar')
     {
 
-
-
-        return $this->name     ;
+        return $this->name;
     }
-
-
-
-
 }
