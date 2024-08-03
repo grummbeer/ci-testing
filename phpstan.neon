@@ -1,5 +1,5 @@
 parameters:
-	errorFormat: github
+	# errorFormat: github
 	# errorFormat: gitlab
 	level: 6
 	paths:

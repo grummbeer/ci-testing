@@ -34,6 +34,8 @@ jobs:
         run: composer ci
         env:
           XDEBUG_MODE: coverage
+          ECS_OUTPUT_FORMAT: checkstyle
+          PHPSTAN_OUTPUT_FORMAT: github
 
       - name: comment on failure
         if: ${{ failure() && github.event_name == 'pull_request' }}
