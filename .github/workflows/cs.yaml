@@ -19,19 +19,19 @@ jobs:
       - name: install tools
         run: composer install-tools
 
-      - name: check
-        # --diff-filter=d ignore deleted files
-        # run: composer cs -- $(echo $(git diff --diff-filter=d --name-only "$COMMIT_RANGE"))
-        run: composer cs
-        env:
-          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
+#      - name: check
+#        # --diff-filter=d ignore deleted files
+#        # run: composer cs -- $(echo $(git diff --diff-filter=d --name-only "$COMMIT_RANGE"))
+#        run: composer cs
+#        env:
+#          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
 
       - name: start server
         # run: php -S localhost:4444 -t public &
         run: composer start-server &
 
-      - name: test
-        run: composer test -- --coverage-text
+      - name: run tools
+        run: composer ci
         env:
           XDEBUG_MODE: coverage
 
