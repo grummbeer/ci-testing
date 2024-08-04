@@ -2,9 +2,8 @@
 
 namespace Tests;
 
-use PHPUnit\Framework\TestCase;
-
 use CiTesting\SomeMath;
+use PHPUnit\Framework\TestCase;
 
 class SomeMathTest extends TestCase
 {
@@ -12,5 +11,6 @@ class SomeMathTest extends TestCase
     {
         $math = new SomeMath();
         $this->assertSame('4', $math->pow(2));
+
     }
 }
