@@ -1,7 +1,5 @@
 name: Coding Standards
-# on: pull_request
-on:
-  workflow_call:
+on: pull_request
 
 jobs:
   cs:
