@@ -15,7 +15,8 @@ class RequestHelloWorld
         return (int) file_get_contents('http://localhost:4444/pow.php');
     }
 
-    public static function random(): string
+    // fail on php 7.4 union type
+    public static function random(): int|string
     {
         return "random";
     }
