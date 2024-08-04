@@ -11,6 +11,7 @@ class RequestHelloWorld
 
     public static function pow(): int
     {
+        // @todo make the URL and port dynamic
         return (int) file_get_contents('http://localhost:4444/pow.php');
     }
 }

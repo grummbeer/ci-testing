@@ -1,7 +1,9 @@
 parameters:
-	# errorFormat: github
-	# errorFormat: "${PHPSTAN_OUTPUT_FORMAT:=table}"
+	errorFormat: table
 	level: 6
 	paths:
 		- src
 		- tests
+	scanDirectories:
+	 # phpunit classes for ./tests
+	 - tools/phpunit/vendor/phpunit
