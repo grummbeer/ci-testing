@@ -19,7 +19,7 @@ jobs:
         run: |
           mkdir --parents tools/ecs toos/staabm
           composer require easy-cs/easy-cs --working-dir=tools/ecs --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-          composer require staabm/annotate-pull-request-from-checkstyle staabm/annotate-pull-request-from-checkstyle --no-interaction 
+          composer require staabm/annotate-pull-request-from-checkstyle --working-dir=tools/staabm --no-interaction 
 
       - name: run checks
         # run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar
