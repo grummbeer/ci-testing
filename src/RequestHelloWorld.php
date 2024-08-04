@@ -14,4 +14,9 @@ class RequestHelloWorld
         // @todo make the URL and port dynamic
         return (int) file_get_contents('http://localhost:4444/pow.php');
     }
+
+    public static function random(): string
+    {
+        return "random";
+    }
 }
