@@ -14,7 +14,7 @@ jobs:
           php_extensions: bcmath
 
       - name: install tools
-        run:
+        run: |
           mkdir --parents tools/phpstan tools/phpunit
           composer require phpstan/phpstan --working-dir=tools/phpstan --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
           composer require phpunit/phpunit --working-dir=tools/phpunit --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist

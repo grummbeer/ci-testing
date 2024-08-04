@@ -13,7 +13,7 @@ jobs:
           php_extensions: bcmath
 
       - name: install phpunit
-        run:
+        run: |
           mkdir --parents tools/phpunit
           composer require phpunit/phpunit --working-dir=tools/phpunit --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 

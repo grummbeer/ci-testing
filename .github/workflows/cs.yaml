@@ -16,7 +16,7 @@ jobs:
           php_extensions: zip gd bcmath
 
       - name: install ecs
-        run:
+        run: |
           mkdir --parents tools/ecs
           composer require easy-cs/easy-cs --working-dir=tools/ecs --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
