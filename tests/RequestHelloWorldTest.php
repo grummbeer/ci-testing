@@ -13,6 +13,6 @@ class RequestHelloWorldTest extends TestCase
     }
 
     public function testPowRoute(): void {
-        $this->assertSame('4', RequestHelloWorld::pow());
+        $this->assertSame(4, RequestHelloWorld::pow());
     }
 }
