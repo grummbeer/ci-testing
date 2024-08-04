@@ -17,7 +17,7 @@ jobs:
 
       - name: install ecs
         run: |
-          mkdir --parents tools/ecs toos/staabm
+          mkdir --parents tools/ecs tools/staabm
           composer require easy-cs/easy-cs --working-dir=tools/ecs --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           composer require staabm/annotate-pull-request-from-checkstyle --working-dir=tools/staabm --no-interaction 
 
