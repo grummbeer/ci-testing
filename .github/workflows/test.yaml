@@ -1,29 +1,30 @@
 name: Test
-on: [pull_request]
-# on: [push, pull_request] # runs twice
+on: pull_request
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       - name: dependencies
         uses: php-actions/composer@v6
         with:
           php_version: 8.3
-          php_extensions: zip gd bcmath
+          php_extensions: bcmath
 
-      - name: install tools
-        run: composer install-tools
+      - name: install phpunit
+        run:
+          mkdir --parents tools/phpunit
+          composer require phpunit/phpunit --working-dir=tools/phpunit --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-      - name: add printer
-        run: composer require --dev mheap/phpunit-github-actions-printer
+#      - name: Composer dependencies
+#        run: composer require phpunit/phpunit --dev --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: start server
         run: composer start-server &
-
+      - name: configure matchers
+        uses: mheap/phpunit-matcher-action@v1
       - name: run tests
-        run: tools/phpunit/vendor/bin/phpunit --printer mheap\\GithubActionsReporter\\Printer tests
+        run: tools/phpunit/vendor/bin/phpunit --teamcity tests
         env:
           XDEBUG_MODE: coverage
