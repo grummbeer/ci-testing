@@ -22,7 +22,7 @@ jobs:
 
       - name: run checks
         # run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar
-        run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar --output-format=checkstyle > checkstyle.xml
+        run: tools/ecs/vendor/bin/ecs check --dry-run --ansi --no-progress-bar --output-format=checkstyle > checkstyle.xml
 
       - uses: staabm/annotate-pull-request-from-checkstyle-action@v1
         with:
