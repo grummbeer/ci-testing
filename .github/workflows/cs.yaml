@@ -1,5 +1,7 @@
 name: Coding Standards
-on: pull_request
+# on: pull_request
+on: workflow_call
+
 jobs:
   cs:
     runs-on: ubuntu-latest

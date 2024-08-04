@@ -1,0 +1,10 @@
+name: Checks
+on: pull_request
+
+jobs:
+  cs:
+    uses: .github/workflows/cs.yaml
+  analyse:
+    uses: .github/workflows/cs.yaml
+  test:
+    uses: .github/workflows/test.yaml
