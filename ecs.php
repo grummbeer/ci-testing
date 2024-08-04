@@ -7,12 +7,15 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 return ECSConfig::configure()
     ->withPaths([
         __DIR__ . '/src',
+        __DIR__ . '/tests',
         __DIR__ . '/functions.php',
         __DIR__ . '/class.php',
         __DIR__ . '/constants.php',
     ])
 
     ->withFileExtensions(['php'])
+
+    ->withSpacing('spaces', PHP_EOL)
 
     // add a single rule
     ->withRules([

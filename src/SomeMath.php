@@ -6,7 +6,7 @@ use function bcpow;
 
 class SomeMath
 {
-    public function pow(int $number): string
+    public function pow(int $number)
     {
         return bcpow((string) $number, '2');
     }
