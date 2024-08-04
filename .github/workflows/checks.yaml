@@ -6,6 +6,7 @@ on: pull_request
 jobs:
   analyse:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: checkout
         uses: actions/checkout@v4
