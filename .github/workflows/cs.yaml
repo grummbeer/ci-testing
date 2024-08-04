@@ -9,6 +9,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
+      - uses: staabm/annotate-pull-request-from-checkstyle-action@v1
+        with:
+          files: checkstyle.xml
+
       - name: dependencies
         uses: php-actions/composer@v6
         with:
@@ -21,7 +25,10 @@ jobs:
           composer require easy-cs/easy-cs --working-dir=tools/ecs --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: run checks
-        run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar
+        # run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar
+        run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar --output-format=checkstyle > checkstyle.xml
+
+
 
       - name: comment on failure
         if: ${{ failure() && github.event_name == 'pull_request' }}
