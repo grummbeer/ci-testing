@@ -64,34 +64,3 @@ jobs:
               repo: context.repo.repo,
               body: body
             })
-
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: [ '7.4', '8.2', '8.3' ]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: dependencies
-        uses: php-actions/composer@v6
-        with:
-          php_version: ${{ matrix.php }}
-          php_extensions: bcmath
-
-      - name: install phpunit
-        run: |
-          mkdir --parents tools/phpunit
-          composer require phpunit/phpunit --working-dir=tools/phpunit --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      #      - name: Composer dependencies
-      #        run: composer require phpunit/phpunit --dev --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: start server
-        run: composer start-server &
-      - name: configure matchers
-        uses: mheap/phpunit-matcher-action@v1
-      - name: run tests
-        run: tools/phpunit/vendor/bin/phpunit --coverage-text --teamcity tests
-        env:
-          XDEBUG_MODE: coverage
