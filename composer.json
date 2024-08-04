@@ -27,10 +27,7 @@
             "@test"
         ],
         "cs": "tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar",
-        "analyse":[
-            "@putenv PHPSTAN_ERROR_FORMAT_XX=${PHPSTAN_ERROR_FORMAT:=table}",
-            "tools/phpstan/vendor/bin/phpstan --no-progress $PHPSTAN_ERROR_FORMAT"
-        ],
+        "analyse": "tools/phpstan/vendor/bin/phpstan --no-progress",
         "test": "XDEBUG_MODE=coverage tools/phpunit/vendor/phpunit/phpunit/phpunit",
         "fix-cs": "@cs --fix"
     }

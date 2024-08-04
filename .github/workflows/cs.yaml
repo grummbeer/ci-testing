@@ -17,17 +17,13 @@ jobs:
 
       - name: install ecs
         run: |
-          mkdir --parents tools/ecs
-          composer require easy-cs/easy-cs --working-dir=tools/ecs --no-interaction  --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+          mkdir --parents tools/ecs toos/staabm
+          composer require easy-cs/easy-cs --working-dir=tools/ecs --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          composer require staabm/annotate-pull-request-from-checkstyle staabm/annotate-pull-request-from-checkstyle --no-interaction 
 
       - name: run checks
         # run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar
-        run: tools/ecs/vendor/bin/ecs check --dry-run --ansi --no-progress-bar --output-format=checkstyle > checkstyle.xml
-
-      - uses: staabm/annotate-pull-request-from-checkstyle-action@v1
-        with:
-          files: checkstyle.xml
-          notices-as-warnings: true # optional
+        run: tools/ecs/vendor/bin/ecs check --dry-run --ansi --no-progress-bar --output-format=checkstyle | tools/staabm/annotate-pull-request-from-checkstyle/cs2pr
 
       - name: comment on failure
         if: ${{ failure() && github.event_name == 'pull_request' }}
