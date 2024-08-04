@@ -1,8 +1,7 @@
-name: coding standards
-on: [pull_request]
-# on: [push, pull_request] # runs twice
+name: Coding Standards
+on: pull_request
 jobs:
-  check:
+  cs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -16,24 +15,15 @@ jobs:
           php_version: 8.3
           php_extensions: zip gd bcmath
 
-      - name: install tools
-        run: composer install-tools
+      - name: install ecs
+        run: |
+          mkdir --parents tools/ecs tools/staabm
+          composer require easy-cs/easy-cs --working-dir=tools/ecs --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+          composer require staabm/annotate-pull-request-from-checkstyle --working-dir=tools/staabm --no-interaction 
 
-      - name: check
-        # --diff-filter=d ignore deleted files
-        # run: composer cs -- $(echo $(git diff --diff-filter=d --name-only "$COMMIT_RANGE"))
-        run: composer cs
-        env:
-          COMMIT_RANGE: "${{ github.event.before }}...${{ github.event.after }}"
-
-      - name: start server
-        # run: php -S localhost:4444 -t public &
-        run: composer start-server &
-
-      - name: test
-        run: composer test -- --coverage-text
-        env:
-          XDEBUG_MODE: coverage
+      - name: run checks
+        # run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar
+        run: tools/ecs/vendor/bin/ecs check --ansi --no-progress-bar --output-format=checkstyle | tools/staabm/vendor/bin/cs2pr
 
       - name: comment on failure
         if: ${{ failure() && github.event_name == 'pull_request' }}

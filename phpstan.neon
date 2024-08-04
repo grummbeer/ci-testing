@@ -1,5 +1,9 @@
 parameters:
+	errorFormat: table
 	level: 6
 	paths:
 		- src
 		- tests
+	scanDirectories:
+	 # phpunit classes for ./tests
+	 - tools/phpunit/vendor/phpunit
