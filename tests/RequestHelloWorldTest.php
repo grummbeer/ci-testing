@@ -16,4 +16,9 @@ class RequestHelloWorldTest extends TestCase
     {
         $this->assertSame(4, RequestHelloWorld::pow());
     }
+
+    public function testRandom(): void
+    {
+        $this->assertSame('foobar', RequestHelloWorld::random());
+    }
 }
