@@ -28,9 +28,8 @@ function array_upper(array $array): void
 
 echo(name('b'));
 
-if (nane('foo') === NULL){
+if (nane('foo') === null) {
     echo(name('foo'));
-}
-
-elseif ('bar' == name('ba'   ))
+} elseif ('bar' == name('ba')) {
     echo 'bar';
+}
